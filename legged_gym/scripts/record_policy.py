@@ -99,10 +99,12 @@ def play(args):
             video.write(img)
             img_idx += 1 
 
-    video.release()
+    # 仅在实际写入视频时释放
+    if video is not None:
+        video.release()
 
 if __name__ == '__main__':
     EXPORT_POLICY = True
-    RECORD_FRAMES = False
+    RECORD_FRAMES = True
     args = get_args()
     play(args)

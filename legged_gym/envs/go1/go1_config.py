@@ -35,7 +35,7 @@ class GO1RoughCfg( LeggedRobotCfg ):
     class env( LeggedRobotCfg.env ):
         num_envs = 4096
         include_history_steps = None  # Number of steps of history to include.
-        num_observations = 235
+        num_observations = 232  # 235 - 3 (removed linear velocity)
         num_privileged_obs = 235
         reference_state_initialization = False
         # reference_state_initialization_prob = 0.85

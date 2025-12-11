@@ -276,8 +276,12 @@ class LeggedRobot(BaseTask):
         if self.add_noise:
             self.privileged_obs_buf += (2 * torch.rand_like(self.privileged_obs_buf) - 1) * self.noise_scale_vec
 
-        # Remove velocity observations from policy observation.
-        if self.num_obs == self.num_privileged_obs - 6:
+        # Remove velocity observations from policy observation when requested by cfg.
+        if self.num_obs == self.num_privileged_obs - 3:
+            # drop linear velocity (3 dims), keep angular velocity
+            self.obs_buf = self.privileged_obs_buf[:, 3:]
+        elif self.num_obs == self.num_privileged_obs - 6:
+            # drop linear + angular velocity (6 dims) — original behavior
             self.obs_buf = self.privileged_obs_buf[:, 6:]
         else:
             self.obs_buf = torch.clone(self.privileged_obs_buf)

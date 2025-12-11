@@ -39,7 +39,7 @@ class GO1AMPCfg( LeggedRobotCfg ):
     class env( LeggedRobotCfg.env ):
         num_envs = 4096
         include_history_steps = None  # Number of steps of history to include.
-        num_observations = 42
+        num_observations = 45  # 48 - 3 (removed linear velocity)
         num_privileged_obs = 48
         reference_state_initialization = True
         reference_state_initialization_prob = 0.85
@@ -47,10 +47,10 @@ class GO1AMPCfg( LeggedRobotCfg ):
 
     class init_state( LeggedRobotCfg.init_state ):
         pos = [0.0, 0.0, 0.42] # x,y,z [m]
-        default_joint_angles = { # = target angles [rad] when action = 0.0
+        default_joint_angles = {  # = target angles [rad] when action = 0.0
             'FL_hip_joint': 0.0,   # [rad]
             'RL_hip_joint': 0.0,   # [rad]
-            'FR_hip_joint': 0.0,  # [rad]
+            'FR_hip_joint': 0.0,   # [rad]
             'RR_hip_joint': 0.0,   # [rad]
 
             'FL_thigh_joint': 0.9,     # [rad]

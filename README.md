@@ -98,3 +98,28 @@ The base environment `legged_robot` implements a rough terrain locomotion task. 
     self.gym.refresh_force_sensor_tensor(self.sim)
     contact = self.sensor_forces[:, :, 2] > 1.
 ```
+
+
+Obs: 45 dim
+1-3 base_ang_vel x/y/z
+4-6 projectory_gravity x/y/z
+7-9 commands lin_vel_x lin_vel_y ang_vel_yaw
+
+Joint Name:
+1) FL_hip_joint
+2) FL_thigh_joint
+3) FL_calf_joint
+4) FR_hip_joint
+5) FR_thigh_joint
+6) FR_calf_joint
+7) RL_hip_joint
+8) RL_thigh_joint
+9) RL_calf_joint
+10) RR_hip_joint
+11) RR_thigh_joint
+12) RR_calf_joint
+10-21 dof_pos - default_dof_pos
+22-33 dof_vel
+34-45 actions(last_time_actions)
+
+Actions: 
