@@ -2,6 +2,7 @@ import os
 import glob
 import json
 import logging
+from pathlib import Path
 
 import torch
 import numpy as np
@@ -72,6 +73,12 @@ class AMPLoader:
         self.trajectory_weights = []
         self.trajectory_frame_durations = []
         self.trajectory_num_frames = []
+
+        if len(motion_files) == 0:
+            fallback_dir = Path(__file__).resolve().parents[3] / "datasets" / "mocap_motions"
+            motion_files = sorted(glob.glob(str(fallback_dir / "*")))
+        if len(motion_files) == 0:
+            raise FileNotFoundError("No motion files found. Checked datasets/motion_files2/* and datasets/mocap_motions/* relative to repo root.")
 
         for i, motion_file in enumerate(motion_files):
             self.trajectory_names.append(motion_file.split('.')[0])
@@ -206,7 +213,7 @@ class AMPLoader:
         """Returns frame for the given trajectory at the specified time."""
         p = times / self.trajectory_lens[traj_idxs]
         n = self.trajectory_num_frames[traj_idxs]
-        idx_low, idx_high = np.floor(p * n).astype(np.int), np.ceil(p * n).astype(np.int)
+        idx_low, idx_high = np.floor(p * n).astype(int), np.ceil(p * n).astype(int)
         all_frame_starts = torch.zeros(len(traj_idxs), self.observation_dim, device=self.device)
         all_frame_ends = torch.zeros(len(traj_idxs), self.observation_dim, device=self.device)
         for traj_idx in set(traj_idxs):
@@ -230,7 +237,7 @@ class AMPLoader:
     def get_full_frame_at_time_batch(self, traj_idxs, times):
         p = times / self.trajectory_lens[traj_idxs]
         n = self.trajectory_num_frames[traj_idxs]
-        idx_low, idx_high = np.floor(p * n).astype(np.int), np.ceil(p * n).astype(np.int)
+        idx_low, idx_high = np.floor(p * n).astype(int), np.ceil(p * n).astype(int)
         all_frame_pos_starts = torch.zeros(len(traj_idxs), AMPLoader.POS_SIZE, device=self.device)
         all_frame_pos_ends = torch.zeros(len(traj_idxs), AMPLoader.POS_SIZE, device=self.device)
         all_frame_rot_starts = torch.zeros(len(traj_idxs), AMPLoader.ROT_SIZE, device=self.device)

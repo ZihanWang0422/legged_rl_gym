@@ -35,6 +35,7 @@ Paper: https://drive.google.com/file/d/1kFm79nMmrc0ZIiH0XO8_HV-fj73agheO/view?us
 5. Reference data can be found in the `datasets` folder.
 
 ### Usage ###
+`export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH`
 1. Train:  
   ```python legged_gym/scripts/train.py --task=a1_amp``
     -  To run on CPU add following arguments: `--sim_device=cpu`, `--rl_device=cpu` (sim on CPU and rl on GPU is possible).

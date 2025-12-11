@@ -37,7 +37,7 @@ MOTION_FILES = glob.glob('datasets/mocap_motions/*')
 class A1AMPCfg( LeggedRobotCfg ):
 
     class env( LeggedRobotCfg.env ):
-        num_envs = 5480
+        num_envs = 1024
         include_history_steps = None  # Number of steps of history to include.
         num_observations = 42
         num_privileged_obs = 48
@@ -50,7 +50,7 @@ class A1AMPCfg( LeggedRobotCfg ):
         default_joint_angles = { # = target angles [rad] when action = 0.0
             'FL_hip_joint': 0.0,   # [rad]
             'RL_hip_joint': 0.0,   # [rad]
-            'FR_hip_joint': 0.0 ,  # [rad]
+            'FR_hip_joint': 0.0,  # [rad]
             'RR_hip_joint': 0.0,   # [rad]
 
             'FL_thigh_joint': 0.9,     # [rad]
@@ -160,7 +160,7 @@ class A1AMPCfgPPO( LeggedRobotCfgPPO ):
 
         amp_reward_coef = 2.0
         amp_motion_files = MOTION_FILES
-        amp_num_preload_transitions = 2000000
+        amp_num_preload_transitions = 200000
         amp_task_reward_lerp = 0.3
         amp_discr_hidden_dims = [1024, 512]
 

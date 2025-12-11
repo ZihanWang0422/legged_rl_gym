@@ -32,6 +32,11 @@ import numpy as np
 import os
 from datetime import datetime
 
+# Torch 的 TensorBoard 模块依赖 distutils.version；在较新 setuptools 的精简版 distutils 中
+# 未自动加载该子模块，这里手动导入以确保 LooseVersion 可用，避免 AttributeError。
+import distutils
+import distutils.version  # noqa: F401
+
 import isaacgym
 from legged_gym.envs import *
 from legged_gym.utils import get_args, task_registry
