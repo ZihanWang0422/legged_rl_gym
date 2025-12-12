@@ -39,7 +39,7 @@ class GO1AMPCfg( LeggedRobotCfg ):
     class env( LeggedRobotCfg.env ):
         num_envs = 4096
         include_history_steps = None  # Number of steps of history to include.
-        num_observations = 45  # 48 - 3 (removed linear velocity)
+        num_observations = 43  # 48 - 5 (remove base lin vel 3 + cmd lin x/y 2)
         num_privileged_obs = 48
         reference_state_initialization = True
         reference_state_initialization_prob = 0.85
