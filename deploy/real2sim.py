@@ -480,7 +480,7 @@ def run_real2sim(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Go1 Real2Sim 可视化')
-    parser.add_argument('--xml', type=str, default='scene.xml', help='MuJoCo XML 模型文件路径')
+    parser.add_argument('--xml', type=str, default='/home/wzh/amp/isaacgym/AMP_for_hardware/deploy/assets/go1/scene.xml', help='MuJoCo XML 模型文件路径')
     parser.add_argument('--connect', action='store_true', help='连接到真实机器人')
     parser.add_argument('--robot-ip', type=str, default='192.168.123.10', help='Go1 机载电脑 IP')
     parser.add_argument('--local-port', type=int, default=8080, help='本地 UDP 端口')
